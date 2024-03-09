@@ -1,4 +1,4 @@
-import { Box, Card, Flex, Text, TextField } from "@radix-ui/themes"
+import { Box, Flex, Text, TextField } from "@radix-ui/themes"
 import { useState } from "react"
 import { toast } from "react-toastify"
 import { isSupportedChain } from "../utils"
@@ -72,7 +72,7 @@ const DelegateVote = () => {
     }
 
     return (
-        <Card style={{ maxWidth: 425 }}>
+        <div className="w-full bg-sky-100 p-6 rounded-md">
             <Flex gap="3" align="center">
 
                 <Box width={`100%`}>
@@ -87,11 +87,11 @@ const DelegateVote = () => {
                                 placeholder="Enter address"
                             />
                         </label>
-                        <button onClick={() => handleDelegate(address)} className="text-sky-100 py-2 bg-sky-500">Add Delegate</button>
+                        <button onClick={() => handleDelegate(address)} className="text-sky-100 py-2 bg-sky-600 rounded-md text-sm">Add Delegate</button>
                     </Flex>
                 </Box>
             </Flex>
-        </Card>
+        </div>
     )
 }
 
