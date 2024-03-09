@@ -1,7 +1,7 @@
 import { Box, Card, Flex, Text, TextField } from "@radix-ui/themes"
 
 
-const DelegateVote = ({ handleToggle }) => {
+const DelegateVote = ({ to, handleDelegate }) => {
     return (
         <Card style={{ maxWidth: 425 }}>
             <Flex gap="3" align="center">
@@ -17,7 +17,7 @@ const DelegateVote = ({ handleToggle }) => {
                                 placeholder="Enter address"
                             />
                         </label>
-                        <button onClick={handleToggle} className="text-sky-100 py-2 bg-sky-500">Add Delegate</button>
+                        <button onClick={() => handleDelegate(to)} className="text-sky-100 py-2 bg-sky-500">Add Delegate</button>
                     </Flex>
                 </Box>
             </Flex>
