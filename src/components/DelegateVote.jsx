@@ -45,15 +45,16 @@ const DelegateVote = () => {
         const contract = getProposalsContract(signer);
 
         try {
-            const transaction = await contract.delegate(to);
+            const delegation = await contract.delegate(to);
 
-            console.log("transaction: ", transaction);
+            console.log("delegation: ", delegation);
 
-            const receipt = await transaction.wait();
+            const receipt = await delegation.wait();
 
             console.log("receipt: ", receipt);
 
             if (receipt.status) {
+                setAddress("");
                 return toast.success("Delegation successful !", { position: "top-right" });
             }
 
