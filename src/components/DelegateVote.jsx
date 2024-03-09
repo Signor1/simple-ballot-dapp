@@ -13,7 +13,6 @@ const DelegateVote = ({ to, handleDelegate }) => {
                                 Delegate&apos;s Address
                             </Text>
                             <TextField.Input
-                                defaultValue="0x09shid7832nmhvjysq32jkj"
                                 placeholder="Enter address"
                             />
                         </label>

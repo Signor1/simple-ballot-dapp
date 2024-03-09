@@ -5,7 +5,7 @@ import GiveRightToVote from "./GiveRightToVote"
 const Header = () => {
     const isChairPerson = useIsChairPerson();
     return (
-        <header className="flex justify-between px-10 py-6 border-b border-sky-500 items-center bg-gray-900">
+        <header className="flex justify-between md:px-10 px-4 py-6 border-b border-sky-500 items-center bg-gray-900">
             <h1 className="text-sky-500 font-sans uppercase font-bold">Ballot</h1>
             <div className="flex justify-center items-center gap-6">
                 {isChairPerson && <GiveRightToVote />}
