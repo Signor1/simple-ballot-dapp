@@ -44,7 +44,9 @@ const useGiveRightToVote = (address) => {
       const transaction = await contract.giveRightToVote(address, {
         gasLimit: estimatedGas,
       });
+
       console.log("transaction: ", transaction);
+
       const receipt = await transaction.wait();
 
       console.log("receipt: ", receipt);
@@ -60,6 +62,7 @@ const useGiveRightToVote = (address) => {
       });
     } catch (error) {
       console.error("error: ", error);
+
       toast.error(error, {
         position: "top-right",
       });
