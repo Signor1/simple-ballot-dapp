@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import { getProposalsContract } from "../constants/contracts";
 import { readOnlyProvider } from "../constants/provider";
 import { decodeBytes32String } from "ethers";
+import { useLatestBlock } from "./useLatestBlock";
 
 export const useProposals = () => {
   const [proposals, setProposals] = useState({
     loading: true,
     data: [],
   });
+
+  const blockNumber = useLatestBlock();
 
   useEffect(() => {
     const contract = getProposalsContract(readOnlyProvider);
@@ -19,7 +22,7 @@ export const useProposals = () => {
           name: decodeBytes32String(item.name),
           voteCount: item.voteCount,
         }));
-        console.log("x : ", converted);
+        // console.log("x : ", converted);
         setProposals({
           loading: false,
           data: converted,
@@ -29,7 +32,7 @@ export const useProposals = () => {
         console.error(err);
         setProposals((prev) => ({ ...prev, loading: false }));
       });
-  }, []);
+  }, [blockNumber]);
 
   return proposals;
 };
