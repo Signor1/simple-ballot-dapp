@@ -5,6 +5,8 @@ import '@radix-ui/themes/styles.css';
 import Proposal from "./components/Proposal";
 import DelegateVote from "./components/DelegateVote";
 import { useProposals } from "./hook/useProposals";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
 
 //web3 Modal configuration function call
 configWeb3Modal();
@@ -43,6 +45,7 @@ function App() {
 
 
       </Container>
+      <ToastContainer />
     </main>
 
   )

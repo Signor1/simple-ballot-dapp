@@ -16,7 +16,7 @@ const GiveRightToVote = () => {
             </Dialog.Trigger>
 
             <Dialog.Content style={{ maxWidth: 450 }}>
-                <Dialog.Title>Vote</Dialog.Title>
+                <Dialog.Title>Admin Add Voters</Dialog.Title>
                 <Dialog.Description size="2" mb="4">
                     Give right to vote
                 </Dialog.Description>
