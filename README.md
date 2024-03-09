@@ -3,6 +3,8 @@
 ## Description
 Ballot Dapp is a decentralized application (Dapp) built on the Ethereum blockchain, allowing users to conduct voting on various proposals using smart contracts. This Dapp utilizes the Ballot smart contract for managing the voting process.
 
+Live preview [Demo](https://my-ballot-dapp.vercel.app/)
+
 ## Features
 - Create and manage proposals.
 - Grant voting rights to addresses.
