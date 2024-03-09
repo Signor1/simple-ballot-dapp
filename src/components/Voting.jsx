@@ -3,6 +3,7 @@ import { getProposalsContract } from "../constants/contracts";
 import { getProvider } from "../constants/provider";
 import { isSupportedChain } from "../utils";
 import Proposal from "./Proposal";
+import { toast } from "react-toastify";
 
 
 const Voting = ({ data }) => {
@@ -13,7 +14,7 @@ const Voting = ({ data }) => {
 
     const handleVote = async (id) => {
 
-        if (!isSupportedChain(chainId)) return console.error("Wrong network");
+        if (!isSupportedChain(chainId)) return toast.error("Wrong network !", { position: "top-right" });
 
         const readWriteProvider = getProvider(walletProvider);
 
@@ -31,10 +32,11 @@ const Voting = ({ data }) => {
             console.log("receipt: ", receipt);
 
             if (receipt.status) {
-                return console.log("vote successfull!");
+                return toast.success("Voted successfully !", { position: "top-right" });
             }
 
-            console.log("vote failed!");
+            toast.error("Voting failed !", { position: "top-right" });
+
         } catch (error) {
             console.log(error);
             let errorText;
@@ -46,7 +48,7 @@ const Voting = ({ data }) => {
                 errorText = "An unknown error occured";
             }
 
-            console.error("error: ", errorText);
+            toast.error(errorText, { position: "top-right" });
         }
     };
 
