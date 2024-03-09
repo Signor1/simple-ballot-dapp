@@ -12,7 +12,7 @@ const GiveRightToVote = () => {
     return (
         <Dialog.Root>
             <Dialog.Trigger>
-                <button className="bg-sky-100 text-sm py-2 px-6 font-medium rounded-md text-sky-800">Add Vote</button>
+                <button className="bg-sky-100 text-sm py-2 px-6 font-medium rounded-md text-sky-800">Add Voter</button>
             </Dialog.Trigger>
 
             <Dialog.Content style={{ maxWidth: 450 }}>
