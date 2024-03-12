@@ -1,28 +1,29 @@
 import { ethers } from "ethers";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { wssProvider } from "../constants/provider";
 
 const useNumberOfDelegates = () => {
   const [value, setValue] = useState(0);
 
+  const trackingdelegates = useCallback((log) => {
+    console.log("tracking Num Of Delegates: ", log);
+    setValue((prevValue) => prevValue + 1);
+  }, []);
+
   useEffect(() => {
     const filter = {
       address: import.meta.env.VITE_CONTRACT_ADDRESS,
-      topics: [ethers.id("DelegateChanged(address,address,uint256,uint256)")],
+      topics: [ethers.id("Delegate(address,address,uint256,uint256)")],
     };
 
     wssProvider.getLogs({ ...filter, fromBlock: 5467475 }).then((events) => {
       setValue(events.length);
     });
 
-    const trackingNumOfDelegates = (logs) => {
-      console.log("tracking Num Of Delegates: ", logs);
-    };
+    wssProvider.on(filter, trackingdelegates);
 
-    wssProvider.on(filter, trackingNumOfDelegates);
-
-    return () => wssProvider.off(filter, trackingNumOfDelegates);
-  }, []);
+    return () => wssProvider.off(filter, trackingdelegates);
+  }, [trackingdelegates]);
 
   return value;
 };

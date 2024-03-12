@@ -25,7 +25,7 @@ function App() {
     <main className="w-full min-h-screen bg-gray-900">
       <Header />
       <section className="w-full md:px-8">
-        <main className="lg:mt-16 mt-8 flex justify-end gap-4 items-center">
+        <main className="lg:mt-16 mt-8 flex flex-wrap justify-start px-6 py-8 md:justify-end gap-4 items-center">
           <button className="bg-sky-700 text-white text-sm py-3 px-6 rounded-md">
             Eligible Number of Voters:
             <span className="bg-sky-100 ml-2 rounded-lg text-sky-500 px-2 py-1 font-bold">
