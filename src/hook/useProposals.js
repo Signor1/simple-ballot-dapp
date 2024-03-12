@@ -10,7 +10,7 @@ export const useProposals = () => {
     data: [],
   });
 
-  const blockNumber = useLatestBlock();
+  // const blockNumber = useLatestBlock();
 
   useEffect(() => {
     const contract = getProposalsContract(readOnlyProvider);
@@ -32,7 +32,7 @@ export const useProposals = () => {
         console.error(err);
         setProposals((prev) => ({ ...prev, loading: false }));
       });
-  }, [blockNumber]);
+  }, []);
 
   return proposals;
 };

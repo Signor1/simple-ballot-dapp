@@ -14,6 +14,14 @@ const useNumberOfVoters = () => {
     wssProvider.getLogs({ ...filter, fromBlock: 5467475 }).then((events) => {
       setValue(events.length + 1);
     });
+
+    const trackingvoters = (log) => {
+      console.log("testing event: ", log);
+    };
+
+    wssProvider.on(filter, trackingvoters);
+
+    return () => wssProvider.off(filter, trackingvoters);
   }, []);
 
   return value;
