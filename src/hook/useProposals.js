@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { getProposalsContract } from "../constants/contracts";
-import { readOnlyProvider, wssProvider } from "../constants/provider";
+import { readOnlyProvider } from "../constants/provider";
 import { decodeBytes32String, ethers } from "ethers";
 
 export const useProposals = () => {
@@ -39,9 +39,13 @@ export const useProposals = () => {
       topics: [ethers.id("Vote(address,uint256,uint256)")],
     };
 
-    wssProvider.on(filter, proposalUpdate);
+    const provider = new ethers.WebSocketProvider(
+      import.meta.env.VITE_WEB_SOCKET_RPC_URL
+    );
 
-    return () => wssProvider.off(filter, proposalUpdate);
+    provider.on(filter, proposalUpdate);
+
+    return () => provider.off(filter, proposalUpdate);
   }, [proposalUpdate]);
 
   return proposals;

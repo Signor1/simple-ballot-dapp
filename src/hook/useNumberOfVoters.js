@@ -5,8 +5,9 @@ import { wssProvider } from "../constants/provider";
 const useNumberOfVoters = () => {
   const [value, setValue] = useState(0);
 
-  const trackingvoters = useCallback((log) => {
-    console.log("testing event: ", log);
+  //   const contract = getProposalsContract(wssProvider);
+
+  const trackingvoters = useCallback(() => {
     setValue((prevValue) => prevValue + 1);
   }, []);
 
@@ -16,13 +17,17 @@ const useNumberOfVoters = () => {
       topics: [ethers.id("GiveRightToVote(address,uint256)")],
     };
 
-    wssProvider.getLogs({ ...filter, fromBlock: 5467475 }).then((events) => {
+    wssProvider.getLogs({ ...filter, fromBlock: 5470625 }).then((events) => {
       setValue(events.length + 1);
     });
 
-    wssProvider.on(filter, trackingvoters);
+    const provider = new ethers.WebSocketProvider(
+      import.meta.env.VITE_WEB_SOCKET_RPC_URL
+    );
 
-    return () => wssProvider.off(filter, trackingvoters);
+    provider.on(filter, trackingvoters);
+
+    return () => provider.off(filter, trackingvoters);
   }, [trackingvoters]);
 
   return value;

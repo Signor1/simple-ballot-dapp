@@ -45,11 +45,11 @@ const useGiveRightToVote = (address) => {
         gasLimit: estimatedGas,
       });
 
-      // console.log("transaction: ", transaction);
+      console.log("transaction: ", transaction);
 
       const receipt = await transaction.wait();
 
-      // console.log("receipt: ", receipt);
+      console.log("receipt: ", receipt);
 
       if (receipt.status) {
         return toast.success("giveRightToVote successfull !", {

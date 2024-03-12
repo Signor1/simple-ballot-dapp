@@ -5,8 +5,7 @@ import { wssProvider } from "../constants/provider";
 const useNumberOfDelegates = () => {
   const [value, setValue] = useState(0);
 
-  const trackingdelegates = useCallback((log) => {
-    console.log("tracking Num Of Delegates: ", log);
+  const trackingdelegates = useCallback(() => {
     setValue((prevValue) => prevValue + 1);
   }, []);
 
@@ -16,13 +15,17 @@ const useNumberOfDelegates = () => {
       topics: [ethers.id("Delegate(address,address,uint256,uint256)")],
     };
 
-    wssProvider.getLogs({ ...filter, fromBlock: 5467475 }).then((events) => {
+    wssProvider.getLogs({ ...filter, fromBlock: 5470625 }).then((events) => {
       setValue(events.length);
     });
 
-    wssProvider.on(filter, trackingdelegates);
+    const provider = new ethers.WebSocketProvider(
+      import.meta.env.VITE_WEB_SOCKET_RPC_URL
+    );
 
-    return () => wssProvider.off(filter, trackingdelegates);
+    provider.on(filter, trackingdelegates);
+
+    return () => provider.off(filter, trackingdelegates);
   }, [trackingdelegates]);
 
   return value;
