@@ -61,9 +61,9 @@ const useGiveRightToVote = (address) => {
         position: "top-right",
       });
     } catch (error) {
-      console.error("error: ", error);
+      // console.error("error: ", error);
 
-      toast.error(error, {
+      toast.error(`${error.message.slice(0, 20)}...`, {
         position: "top-right",
       });
     }
