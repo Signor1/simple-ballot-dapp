@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getProposalsContract } from "../constants/contracts";
-import { readOnlyProvider } from "../constants/provider";
+import { readOnlyProvider, wssProvider } from "../constants/provider";
 import { decodeBytes32String, ethers } from "ethers";
 
 export const useProposals = () => {
@@ -9,7 +9,9 @@ export const useProposals = () => {
     data: [],
   });
 
-  // const blockNumber = useLatestBlock();
+  const proposalUpdate = useCallback((log) => {
+    console.log("proposalUpdate: ", log);
+  }, []);
 
   useEffect(() => {
     const contract = getProposalsContract(readOnlyProvider);
@@ -36,7 +38,11 @@ export const useProposals = () => {
       address: import.meta.env.VITE_CONTRACT_ADDRESS,
       topics: [ethers.id("Vote(address,uint256,uint256)")],
     };
-  }, []);
+
+    wssProvider.on(filter, proposalUpdate);
+
+    return () => wssProvider.off(filter, proposalUpdate);
+  }, [proposalUpdate]);
 
   return proposals;
 };
