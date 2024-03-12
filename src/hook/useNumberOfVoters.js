@@ -1,9 +1,14 @@
 import { ethers } from "ethers";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { wssProvider } from "../constants/provider";
 
 const useNumberOfVoters = () => {
   const [value, setValue] = useState(0);
+
+  const trackingvoters = useCallback((log) => {
+    console.log("testing event: ", log);
+    setValue((prevValue) => prevValue + 1);
+  }, []);
 
   useEffect(() => {
     const filter = {
@@ -15,14 +20,10 @@ const useNumberOfVoters = () => {
       setValue(events.length + 1);
     });
 
-    const trackingvoters = (log) => {
-      console.log("testing event: ", log);
-    };
-
     wssProvider.on(filter, trackingvoters);
 
     return () => wssProvider.off(filter, trackingvoters);
-  }, []);
+  }, [trackingvoters]);
 
   return value;
 };

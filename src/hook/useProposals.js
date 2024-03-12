@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { getProposalsContract } from "../constants/contracts";
 import { readOnlyProvider } from "../constants/provider";
 import { decodeBytes32String } from "ethers";
-import { useLatestBlock } from "./useLatestBlock";
 
 export const useProposals = () => {
   const [proposals, setProposals] = useState({
